@@ -1,0 +1,13 @@
+- name: boostrap sontaran
+  hosts:
+    - sontaran
+  
+  tasks:
+    - name: install required packages
+      apt:
+        state: present
+        pkg:
+          - tmux
+          - vim
+          - curl
+          - git

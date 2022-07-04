@@ -1,0 +1,4 @@
+ingress-nginx:
+  defaultBackend:
+    enabled: true
+    name: "default-http-backend"

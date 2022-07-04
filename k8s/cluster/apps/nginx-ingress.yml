@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-ingress
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: k8s/cluster/nginx-ingress
+    repoURL: https://gitlab.cri.epita.fr/ing/majeures/ice/ice-cloud.git
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    namespace: nginx-ingress
+    name: in-cluster
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

@@ -1,0 +1,47 @@
+{{- range $ingress := .Values.ingresses }}
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "{{ $ingress.name }}-ingress-cert"
+  namespace: "{{ $ingress.namespace }}"
+spec:
+  commonName: "{{ $ingress.host }}"
+  secretName: "{{ $ingress.name }}-ingress-cert-secret"
+  dnsNames:
+    - "{{ $ingress.host }}"
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "{{ $ingress.name }}-ingress"
+  namespace: "{{ $ingress.namespace }}"
+  {{ if (($ingress.basicAuth).enabled) }}
+  annotations:
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: "{{ $ingress.basicAuth.secret }}"
+    nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
+  {{ end }}
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - "{{ $ingress.host }}"
+      secretName: "{{ $ingress.name }}-ingress-cert-secret"
+  rules:
+    - host: "{{ $ingress.host }}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: "{{ $ingress.service }}"
+                port:
+                  number: {{ $ingress.port }}
+
+{{- end }}
