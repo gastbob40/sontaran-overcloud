@@ -1,4 +1,0 @@
-pgadmin4:
-  existingSecret: "pgadmin-password"
-  env:
-    email: "root@ice.iaas.epita.fr"

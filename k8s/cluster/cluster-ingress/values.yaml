@@ -1,28 +1,7 @@
 ingresses:
 
   - name: argocd
-    host: argocd.ice.iaas.epita.fr
+    host: argocd.tardis.gastbob40.ovh
     service: argocd-server
     namespace: argocd
     port: 80
-
-  - name: pgadmin
-    host: pgadmin.ice.iaas.epita.fr
-    service: pgadmin-pgadmin4
-    namespace: pgadmin
-    port: 80
-    basicAuth:
-      enabled: true
-      secret: "ingress-basic-auth"
-
-  - name: vault
-    host: vault.ice.iaas.epita.fr
-    service: vault-service
-    namespace: cluster-misc
-    port: 8200
-
-  - name: superset
-    host: superset.ice.iaas.epita.fr
-    service: superset
-    namespace: superset
-    port: 8000

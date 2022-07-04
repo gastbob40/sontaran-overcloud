@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     path: k8s/cluster/nginx-ingress
-    repoURL: https://gitlab.cri.epita.fr/ing/majeures/ice/ice-cloud.git
+    repoURL: https://github.com/gastbob40/tardis-overcloud.git
     targetRevision: HEAD
     helm:
       valueFiles:

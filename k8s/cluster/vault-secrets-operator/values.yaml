@@ -1,4 +1,0 @@
-vault-secrets-operator:
-  vault:
-    authMethod: kubernetes
-    address: "http://node-1.ice.openstack.epita.fr:8200"
