@@ -20,11 +20,18 @@ kind: Ingress
 metadata:
   name: "{{ $ingress.name }}-ingress"
   namespace: "{{ $ingress.namespace }}"
-  {{ if (($ingress.basicAuth).enabled) }}
+
+  {{ if or ($ingress.basicAuth).enabled (hasKey $ingress "annotations") }}
   annotations:
+    {{ if (($ingress.basicAuth).enabled) }}
     nginx.ingress.kubernetes.io/auth-type: basic
     nginx.ingress.kubernetes.io/auth-secret: "{{ $ingress.basicAuth.secret }}"
     nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
+    {{ end }}
+
+    {{ range $key, $value := $ingress.annotations }}
+    {{ $key }}: "{{ $value }}"
+    {{ end }}
   {{ end }}
 spec:
   ingressClassName: nginx
