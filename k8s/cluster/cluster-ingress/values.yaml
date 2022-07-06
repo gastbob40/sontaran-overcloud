@@ -5,3 +5,9 @@ ingresses:
     service: argocd-server
     namespace: argocd
     port: 80
+
+  - name: uptime
+    host: uptime.tardis.gastbob40.ovh
+    service: uptime-kuma
+    namespace: uptime-kuma
+    port: 3001
