@@ -39,6 +39,8 @@ spec:
             limits:
               cpu: 700m
               memory: 750Mi
+      securityContext:
+        fsGroup: 2000
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
