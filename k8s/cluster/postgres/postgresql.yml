@@ -1,0 +1,40 @@
+---
+apiVersion: acid.zalan.do/v1
+kind: postgresql
+metadata:
+  name: sontarian-postgresql
+  annotations:
+    reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+spec:
+  teamId: sontarian
+  volume:
+    size: 10Gi
+  numberOfInstances: 2
+
+  # users: name -> permissions (usually [])
+  users:
+    justorderit.justorderit_backend: []
+    gastbob40: []
+
+  # databases: name -> owner
+  databases:
+    justorderit_backend: justorderit.justorderit_backend
+
+  postgresql:
+    version: "13"
+    parameters:
+      max_connections: "500"
+
+  resources:
+    requests:
+      cpu: "2"
+      memory: "2G"
+    limits:
+      cpu: "4"
+      memory: "4G"
+
+  additionalVolumes:
+    - name: pgbackup
+      mountPath: /home/postgres/pgbackup
+      volumeSource:
+        emptyDir: {}

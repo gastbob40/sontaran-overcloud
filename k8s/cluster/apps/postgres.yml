@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgres
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: k8s/cluster/postgres
+    repoURL: https://github.com/gastbob40/tardis-overcloud.git
+    targetRevision: HEAD
+  destination:
+    namespace: postgres
+    name: in-cluster
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
