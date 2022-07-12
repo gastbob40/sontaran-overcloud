@@ -40,9 +40,9 @@ spec:
               cpu: 700m
               memory: 750Mi
       securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
+        runAsUser: 0
+        runAsGroup: 0
+        fsGroup: 0
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
