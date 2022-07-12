@@ -1,0 +1,10 @@
+---
+kind: Kustomization
+
+commonLabels:
+  component: backend
+
+resources:
+  - deployment.yml
+  - service.yml
+  - ingress.yml

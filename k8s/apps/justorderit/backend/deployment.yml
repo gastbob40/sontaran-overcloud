@@ -1,0 +1,78 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: backend
+spec:
+  replicas: 1
+  serviceName: backend
+  selector:
+    matchLabels:
+      component: backend
+  template:
+    metadata:
+      labels:
+        component: backend
+    spec:
+      imagePullSecrets:
+        - name: gitlab-epita-dockerconfig
+      containers:
+        - name: app
+          image: registry.cri.epita.fr/damien.champeyroux/justorderit
+          command:
+            - java
+          args:
+            - -Xmx512m
+            - -jar
+            - /app/app.jar
+          env:
+            - name: POD_METADATA_UID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.uid
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          startupProbe:
+            httpGet:
+              port: http
+              path: /q/health
+            initialDelaySeconds: 30
+            failureThreshold: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              port: http
+              path: /q/health
+          livenessProbe:
+            httpGet:
+              port: http
+              path: /q/health
+          resources:
+            requests:
+              cpu: 400m
+              memory: 500Mi
+            limits:
+              cpu: 700m
+              memory: 750Mi
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - justorderit
+                    - key: component
+                      operator: In
+                      values:
+                        - backend
+                topologyKey: kubernetes.io/hostname

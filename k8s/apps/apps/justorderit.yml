@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: justorderit
+  namespace: argocd
+  labels:
+    app: justorderit
+spec:
+  project: default
+  source:
+    path: k8s/apps/justorderit
+    repoURL: https://github.com/gastbob40/sontaran-overcloud.git
+    targetRevision: HEAD
+  destination:
+    name: in-cluster
+    namespace: justorderit
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

@@ -1,0 +1,15 @@
+---
+kind: Kustomization
+namespace: justorderit
+
+commonLabels:
+  app: justorderit
+
+resources:
+  - namespace.yml
+  - secrets.yml
+  - backend
+
+images:
+  - name: registry.cri.epita.fr/damien.champeyroux/justorderit
+    newTag: 1.0.1-SNAPSHOT
