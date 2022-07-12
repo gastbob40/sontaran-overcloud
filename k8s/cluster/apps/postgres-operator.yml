@@ -11,8 +11,7 @@ spec:
     targetRevision: 1.8.2
     helm:
       values: |
-        configKubernetes:
-          enable_cross_namespace_secret: true
+        enable_cross_namespace_secret: true
   destination:
     namespace: postgres-operator
     name: in-cluster
