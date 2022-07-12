@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     name: redis
-    component: cache
+    component: redis
   name: redis
 spec:
   replicas: 1
@@ -14,7 +14,7 @@ spec:
     metadata:
       labels:
         name: redis
-        component: cache
+        component: redis
     spec:
       containers:
         - name: redis
