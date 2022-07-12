@@ -17,3 +17,9 @@ ingresses:
     service: backend
     namespace: justorderit
     port: 8080
+
+  - name: justorderit-frontend
+    host: justorderit.sontaran.gastbob40.ovh
+    service: frontend
+    namespace: justorderit
+    port: 3000
