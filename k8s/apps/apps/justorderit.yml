@@ -1,21 +1,19 @@
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: justorderit
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
+  namespace: argocd
   labels:
     app: justorderit
 spec:
-  syncPolicy:
-    automated:
-      prune: true
+  project: default
+  source:
+    path: k8s/apps/justorderit
+    repoURL: https://github.com/gastbob40/sontaran-overcloud.git
+    targetRevision: HEAD
   destination:
     name: in-cluster
     namespace: justorderit
-  project: default
-  source:
-    repoURL: https://github.com/gastbob40/sontaran-overcloud.git
-    path: k8s/apps/justorderit
-    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
