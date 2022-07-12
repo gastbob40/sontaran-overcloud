@@ -19,6 +19,7 @@ spec:
       containers:
         - name: app
           image: registry.cri.epita.fr/damien.champeyroux/justorderitfront
+          imagePullPolicy: Always
           env:
             - name: POD_METADATA_UID
               valueFrom:
