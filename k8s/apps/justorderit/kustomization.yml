@@ -10,6 +10,11 @@ resources:
   - secrets.yml
   - backend
 
+configMapGenerator:
+  - name: common-config
+    literals:
+      - DB_HOST=sontaran-main-cluster.postgres.svc.cluster.local
+
 images:
   - name: registry.cri.epita.fr/damien.champeyroux/justorderit
     newTag: 1.0.1-SNAPSHOT

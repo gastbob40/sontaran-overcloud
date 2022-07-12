@@ -42,7 +42,9 @@ spec:
                 secretKeyRef:
                   name: justorderit.backend.sontaran-main-cluster.credentials.postgresql.acid.zalan.do
                   key: password
-
+          envFrom:
+            - configMapRef:
+                name: common-config
           ports:
             - name: http
               containerPort: 8080
