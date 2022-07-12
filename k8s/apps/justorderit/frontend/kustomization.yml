@@ -1,0 +1,9 @@
+---
+kind: Kustomization
+
+commonLabels:
+  component: frontend
+
+resources:
+  - deployment.yml
+  - service.yml

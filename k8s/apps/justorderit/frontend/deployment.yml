@@ -1,0 +1,65 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  serviceName: frontend
+  selector:
+    matchLabels:
+      component: frontend
+  template:
+    metadata:
+      labels:
+        component: frontend
+    spec:
+      imagePullSecrets:
+        - name: gitlab-epita-dockerconfig
+      containers:
+        - name: app
+          image: registry.cri.epita.fr/damien.champeyroux/justorderitfront
+          imagePullPolicy: Always
+          env:
+            - name: POD_METADATA_UID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.uid
+          envFrom:
+            - configMapRef:
+                name: common-config
+          volumeMounts:
+            - mountPath: /usr/src/app/node_modules/.vite
+              name: test
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 400m
+              memory: 500Mi
+            limits:
+              cpu: 700m
+              memory: 750Mi
+      securityContext:
+        fsGroup: 2000
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - justorderit
+                    - key: component
+                      operator: In
+                      values:
+                        - frontend
+                topologyKey: kubernetes.io/hostname
+      volumes:
+        - name: test
+          emptyDir: {}

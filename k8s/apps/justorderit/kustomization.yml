@@ -10,6 +10,7 @@ resources:
   - secrets.yml
   - backend
   - redis
+  - frontend
 
 configMapGenerator:
   - name: common-config
@@ -20,3 +21,5 @@ configMapGenerator:
 images:
   - name: registry.cri.epita.fr/damien.champeyroux/justorderit
     newTag: 1.0.2-SNAPSHOT
+  - name: registry.cri.epita.fr/damien.champeyroux/justorderitfront
+    newTag: latest
