@@ -41,6 +41,11 @@ spec:
               memory: 750Mi
       securityContext:
         fsGroup: 2000
+      initContainers:
+        - name: permission-fix
+          image: busybox
+          command: [ 'sh', '-c' ]
+          args: [ 'chown -R root:2000 /usr/src' ]
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
