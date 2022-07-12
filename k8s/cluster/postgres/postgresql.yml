@@ -2,7 +2,7 @@
 apiVersion: acid.zalan.do/v1
 kind: postgresql
 metadata:
-  name: sontarian-postgresql
+  name: sontarian
   annotations:
     reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
 spec:
