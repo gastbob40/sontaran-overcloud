@@ -1,0 +1,21 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: justorderit
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    app: justorderit
+spec:
+  syncPolicy:
+    automated:
+      prune: true
+  destination:
+    name: in-cluster
+    namespace: justorderit
+  project: default
+  source:
+    repoURL: https://github.com/gastbob40/tardis-overcloud.git
+    path: k8s/apps/justorderit
+    targetRevision: HEAD
