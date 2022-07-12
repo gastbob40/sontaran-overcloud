@@ -18,7 +18,7 @@ spec:
               service:
                 name: backend
                 port:
-                  number: 8080
+                  name: http
   tls:
     - hosts:
         - backend.justorderit.sontaran.gastbob40.ovh
