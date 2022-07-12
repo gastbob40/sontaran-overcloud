@@ -9,6 +9,10 @@ spec:
     repoURL: https://opensource.zalando.com/postgres-operator/charts/postgres-operator
     chart: postgres-operator
     targetRevision: 1.8.2
+    helm:
+      values: |
+        configKubernetes:
+          enable_cross_namespace_secret: true
   destination:
     namespace: postgres-operator
     name: in-cluster
