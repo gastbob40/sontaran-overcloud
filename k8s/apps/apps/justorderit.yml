@@ -16,6 +16,6 @@ spec:
     namespace: justorderit
   project: default
   source:
-    repoURL: https://github.com/gastbob40/tardis-overcloud.git
+    repoURL: https://github.com/gastbob40/sontaran-overcloud.git
     path: k8s/apps/justorderit
     targetRevision: HEAD
