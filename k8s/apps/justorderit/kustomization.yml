@@ -9,12 +9,14 @@ resources:
   - namespace.yml
   - secrets.yml
   - backend
+  - redis
 
 configMapGenerator:
   - name: common-config
     literals:
       - DB_HOST=sontaran-main-cluster.postgres.svc.cluster.local
+      - REDIS_HOST=redis.justorderit.svc.cluster.local
 
 images:
   - name: registry.cri.epita.fr/damien.champeyroux/justorderit
-    newTag: 1.0.1-SNAPSHOT
+    newTag: 1.0.2-SNAPSHOT

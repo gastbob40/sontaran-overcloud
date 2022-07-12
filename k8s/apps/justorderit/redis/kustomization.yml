@@ -1,0 +1,9 @@
+---
+kind: Kustomization
+
+commonLabels:
+  component: redis
+
+resources:
+  - deployment.yml
+  - service.yml
