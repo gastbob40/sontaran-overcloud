@@ -24,7 +24,7 @@ spec:
           args:
             - -Xmx512m
             - -jar
-            - /app.jar
+            - /app/app.jar
           env:
             - name: POD_METADATA_UID
               valueFrom:
