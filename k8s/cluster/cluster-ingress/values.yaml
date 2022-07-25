@@ -11,3 +11,9 @@ ingresses:
     service: uptime-kuma
     namespace: uptime-kuma
     port: 3001
+
+  - name: prometheus
+    host: prometheus.sontaran.gastbob40.ovh
+    service: prometheus-service
+    namespace: monitoring
+    port: 9090

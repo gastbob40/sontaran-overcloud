@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: k8s/cluster/prometheus
+    repoURL: https://github.com/gastbob40/sontaran-overcloud.git
+    targetRevision: HEAD
+  destination:
+    namespace: monitoring
+    name: in-cluster
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

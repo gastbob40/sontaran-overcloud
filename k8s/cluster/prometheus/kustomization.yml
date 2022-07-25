@@ -1,0 +1,10 @@
+---
+kind: Kustomization
+namespace: monitoring
+
+resources:
+  - namespace.yml
+  - deployment.yml
+  - service.yml
+  - clusterRole.yml
+  - config-map.yml
