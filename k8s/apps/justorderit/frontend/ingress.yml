@@ -1,0 +1,38 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "justorderit-frontend-ingress-cert"
+  namespace: "justorderit"
+spec:
+  commonName: "justorderit.sontaran.gastbob40.ovh"
+  secretName: "justorderit-frontend-ingress-cert-secret"
+  dnsNames:
+    - "justorderit.sontaran.gastbob40.ovh"
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "justorderit-frontend-ingress"
+  namespace: "justorderit"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - "justorderit.sontaran.gastbob40.ovh"
+      secretName: "justorderit-frontend-ingress-cert-secret"
+  rules:
+    - host: "justorderit.sontaran.gastbob40.ovh"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: "frontend"
+                port:
+                  number: 3000
+  
