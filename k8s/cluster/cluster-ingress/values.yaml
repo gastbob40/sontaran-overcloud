@@ -11,9 +11,3 @@ ingresses:
     service: uptime-kuma
     namespace: uptime-kuma
     port: 3001
-
-  - name: justorderit-frontend
-    host: justorderit.sontaran.gastbob40.ovh
-    service: frontend
-    namespace: justorderit
-    port: 3000
