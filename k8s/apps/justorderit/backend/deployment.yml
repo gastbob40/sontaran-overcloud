@@ -22,7 +22,7 @@ spec:
           command:
             - java
           args:
-            - -Xmx512m
+            - -Xmx80m
             - -jar
             - /app/app.jar
           env:
@@ -66,10 +66,10 @@ spec:
               path: /q/health
           resources:
             requests:
-              cpu: 400m
+              cpu: 100m
               memory: 500Mi
             limits:
-              cpu: 700m
+              cpu: 120m
               memory: 750Mi
       securityContext:
         runAsUser: 1000
