@@ -1,25 +1,38 @@
 ---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "justorderit-backend-ingress-cert"
+  namespace: "justorderit"
+spec:
+  commonName: "backend.justorderit.sontaran.gastbob40.ovh"
+  secretName: "justorderit-backend-ingress-cert-secret"
+  dnsNames:
+    - "backend.justorderit.sontaran.gastbob40.ovh"
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: backend
-  annotations:
-    cert-manager.io/cluster-issuer: default-issuer
-    nginx.ingress.kubernetes.io/affinity: cookie
-    nginx.ingress.kubernetes.io/affinity-mode: persistent
+  name: "justorderit-backend-ingress"
+  namespace: "justorderit"
 spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - "backend.justorderit.sontaran.gastbob40.ovh"
+      secretName: "justorderit-backend-ingress-cert-secret"
   rules:
-    - host: backend.justorderit.sontaran.gastbob40.ovh
+    - host: "backend.justorderit.sontaran.gastbob40.ovh"
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: backend
+                name: "backend"
                 port:
-                  name: http
-  tls:
-    - hosts:
-        - backend.justorderit.sontaran.gastbob40.ovh
-      secretName: backend-justorderit-tls
+                  number: 8080
+  
