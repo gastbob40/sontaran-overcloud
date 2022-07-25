@@ -17,3 +17,9 @@ ingresses:
     service: prometheus-service
     namespace: monitoring
     port: 9090
+
+  - name: grafana
+    host: grafana.sontaran.gastbob40.ovh
+    service: grafana
+    namespace: grafana
+    port: 3000

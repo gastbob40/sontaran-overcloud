@@ -1,0 +1,9 @@
+---
+kind: Kustomization
+namespace: grafana
+
+resources:
+  - deployment.yml
+  - namespace.yml
+  - service.yml
+  - volume.yml
