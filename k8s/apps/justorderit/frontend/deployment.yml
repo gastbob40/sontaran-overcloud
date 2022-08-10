@@ -35,13 +35,6 @@ spec:
             - name: http
               containerPort: 3000
               protocol: TCP
-          resources:
-            requests:
-              cpu: 100m
-              memory: 500Mi
-            limits:
-              cpu: 120m
-              memory: 750Mi
       securityContext:
         fsGroup: 2000
       affinity:

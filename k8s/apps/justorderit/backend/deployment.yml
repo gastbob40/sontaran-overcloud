@@ -64,13 +64,6 @@ spec:
             httpGet:
               port: http
               path: /q/health
-          resources:
-            requests:
-              cpu: 250m
-              memory: 500Mi
-            limits:
-              cpu: 500m
-              memory: 750Mi
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
