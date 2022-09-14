@@ -20,6 +20,6 @@ configMapGenerator:
 
 images:
   - name: registry.cri.epita.fr/damien.champeyroux/justorderit
-    newTag: 1.0.3-SNAPSHOT
+    newTag: 1.0.4-SNAPSHOT
   - name: registry.cri.epita.fr/damien.champeyroux/justorderitfront
     newTag: latest
