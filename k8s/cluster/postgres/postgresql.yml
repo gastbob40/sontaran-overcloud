@@ -14,11 +14,13 @@ spec:
   # users: name -> permissions (usually [])
   users:
     justorderit.backend: []
+    fraternity.frat_logs: []
     gastbob40: []
 
   # databases: name -> owner
   databases:
     justorderit_backend: justorderit.backend
+    fraternity_frat_logs: fraternity.frat_logs
 
   postgresql:
     version: "13"
