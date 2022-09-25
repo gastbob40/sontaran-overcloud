@@ -1,11 +1,10 @@
 ---
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: backend
 spec:
   replicas: 1
-  serviceName: backend
   selector:
     matchLabels:
       component: backend
