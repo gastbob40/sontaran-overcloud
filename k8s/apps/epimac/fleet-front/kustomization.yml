@@ -1,0 +1,10 @@
+---
+kind: Kustomization
+
+commonLabels:
+  component: fleet
+
+resources:
+  - deployment.yml
+  - service.yml
+  - ingress.yml

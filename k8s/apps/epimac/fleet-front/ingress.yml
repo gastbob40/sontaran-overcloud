@@ -1,0 +1,38 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "fleet-epimac-ingress-cert"
+  namespace: "epimac"
+spec:
+  commonName: "fleet.epimac.org"
+  secretName: "fleet-epimac-ingress-cert-secret"
+  dnsNames:
+    - "fleet.epimac.org"
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "fleet-epimac-ingress"
+  namespace: "epimac"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - "fleet.epimac.org"
+      secretName: "fleet-epimac-ingress-cert-secret"
+  rules:
+    - host: "fleet.epimac.org"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: "fleet"
+                port:
+                  number: 3000
+  
