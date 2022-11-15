@@ -26,6 +26,13 @@ spec:
                   fieldPath: metadata.uid
             - name: NEXTAUTH_URL
               value: https://fleet.epimac.org
+            - name: NEXTAUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: epimac-fleet-front
+                  key: NEXTAUTH_SECRET
+            - name: API_HOST
+              value: http://100.72.133.46:8000
           ports:
             - name: http
               containerPort: 3000
