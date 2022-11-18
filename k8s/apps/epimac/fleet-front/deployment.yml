@@ -31,6 +31,13 @@ spec:
                 secretKeyRef:
                   name: epimac-fleet-front
                   key: NEXTAUTH_SECRET
+            - name: APPLE_ID
+              value: org.epimac.fleet
+            - name: APPLE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: epimac-fleet-front
+                  key: APPLE_SECRET
             - name: API_HOST
               value: http://100.72.133.46:8000
           ports:
