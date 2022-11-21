@@ -18,6 +18,9 @@ kind: Ingress
 metadata:
   name: "fleet-epimac-ingress"
   namespace: "epimac"
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+
 spec:
   ingressClassName: nginx
   tls:
@@ -28,7 +31,7 @@ spec:
     - host: "fleet.epimac.org"
       http:
         paths:
-          - path: /
+          - path: /?(.*)
             pathType: Prefix
             backend:
               service:
